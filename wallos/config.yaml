@@ -13,9 +13,9 @@ arch:
   - amd64
 init: false
 ports:
-  80/tcp: null
+  80/tcp: 8282
 ports_description:
-  80/tcp: Wallos web interface (optional)
+  80/tcp: Wallos web interface / API
 map:
   - addon_config:rw
 options:
