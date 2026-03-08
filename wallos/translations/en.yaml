@@ -1,0 +1,4 @@
+configuration:
+  timezone:
+    name: Timezone
+    description: Timezone passed to Wallos container (TZ environment variable).
