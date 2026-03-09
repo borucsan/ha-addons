@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Wallos
-version: "4.6.2-2"
+version: "1.0.0"
 slug: wallos
 description: Open-source personal subscription tracker
 url: "https://github.com/borucsan/ha-addons/tree/main/wallos"
