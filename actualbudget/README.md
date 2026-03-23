@@ -1,4 +1,4 @@
-# Wallos Home Assistant Add-on
+# Actual Budget Home Assistant Add-on
 
 [![GitHub Release][releases-shield]][releases]
 ![Project Stage][project-stage-shield]
@@ -22,35 +22,26 @@
 [releases]: https://github.com/borucsan/ha-addons/releases
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
 
-This add-on runs [Wallos](https://github.com/ellite/Wallos) inside Home Assistant OS.
+This add-on runs [Actual Budget](https://actualbudget.org) inside Home Assistant OS.
 
-Wallos is an open-source, self-hosted personal subscription tracker.  
-Wallos version: 4.7.3
+Actual Budget is a local-first, privacy-focused personal finance application with a powerful budgeting interface.
 
 ## Installation
 
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fborucsan%2Fha-addons)
 
-Install the **Wallos** add-on from this repository and start it.
+Install the **Actual Budget** add-on from this repository and start it.
 
 ## Configuration
 
 - **timezone** (default: `UTC`)
-  - Timezone used by the Wallos container, e.g. `Europe/Warsaw`.
-
-## API Access
-
-Wallos exposes a REST API under `/api/`. To use it from a Home Assistant integration or external tool:
-
-1. Set a host port in the add-on network configuration (default: `8282`).
-2. Generate an API key in Wallos → **Settings → API**.
-3. Call the API at `http://homeassistant.local:8282/api/` with the `Authorization: Bearer <key>` header.
+  - Timezone used by the Actual Budget container, e.g. `Europe/Warsaw`.
 
 ## Disclaimers and copyright information
 
-This add-on is a wrapper around the official [Wallos](https://github.com/ellite/Wallos) Docker image to make it work as a Home Assistant add-on.
+This add-on is a wrapper around the official [Actual Budget](https://github.com/actualbudget/actual) Docker image to make it work as a Home Assistant add-on.
 
-Wallos — Open-Source Personal Subscription Tracker  
-Copyright (C) ellite
+Actual Budget — Local-first personal finance app  
+Copyright (C) James Long
 
-This program comes with ABSOLUTELY NO WARRANTY.
+Licensed under the [MIT License](LICENSE).

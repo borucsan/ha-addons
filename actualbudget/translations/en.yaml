@@ -1,0 +1,4 @@
+configuration:
+  timezone:
+    name: Timezone
+    description: Timezone passed to the Actual Budget container (TZ environment variable).
