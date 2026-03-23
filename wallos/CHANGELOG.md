@@ -1,3 +1,7 @@
+## 1.2.0
+
+- Fixed data loss on update: replaced non-functional S6 cont-init.d script with a proper startup wrapper that persists database and logos to addon_config before launching Wallos.
+
 ## 1.1.0
 
 - Updated Wallos to version 4.7.3.

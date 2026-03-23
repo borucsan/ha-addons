@@ -9,4 +9,8 @@ LABEL io.hass.arch="aarch64|amd64"
 
 COPY rootfs /
 
+RUN chmod +x /var/www/html/ha-startup.sh
+
 EXPOSE 80
+
+CMD ["/var/www/html/ha-startup.sh"]
