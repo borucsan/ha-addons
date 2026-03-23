@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv bashio
 # Moves Actual Budget data directory to addon_config and replaces it with a symlink.
 
-ADDON_CONFIG="/addon_configs/actualbudget"
+ADDON_CONFIG="/addon_config"
 DATA_SRC="/data/server-files"
 USER_SRC="/data/user-files"
 
