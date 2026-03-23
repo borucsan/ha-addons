@@ -1,3 +1,7 @@
+## 1.4.0
+
+- Fixed persistent storage: corrected addon_config mount path to `/config` (HA Supervisor maps `addon_config` to `/config` inside the container, not `/addon_config`).
+
 ## 1.3.0
 
 - Fixed incorrect addon_config mount path: `/addon_configs/wallos` → `/addon_config` (correct HA Supervisor path inside container).

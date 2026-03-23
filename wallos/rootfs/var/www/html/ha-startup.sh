@@ -2,7 +2,7 @@
 # Runs before the original Wallos startup.sh.
 # Moves data directories to addon_config (persistent storage) and replaces them with symlinks.
 
-ADDON_CONFIG="/addon_config"
+ADDON_CONFIG="/config"
 DB_SRC="/var/www/html/db"
 LOGOS_SRC="/var/www/html/images/uploads/logos"
 
