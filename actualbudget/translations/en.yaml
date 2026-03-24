@@ -2,3 +2,9 @@ configuration:
   timezone:
     name: Timezone
     description: Timezone passed to the Actual Budget container (TZ environment variable).
+  certfile:
+    name: Certificate file
+    description: Certificate file name in the /ssl directory (e.g. fullchain.pem).
+  keyfile:
+    name: Key file
+    description: Private key file name in the /ssl directory (e.g. privkey.pem).

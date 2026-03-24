@@ -4,6 +4,7 @@ version: "1.1.0"
 slug: actualbudget
 description: Local-first personal finance app
 url: "https://github.com/borucsan/ha-addons/tree/main/actualbudget"
+webui: https://[HOST]:[PORT:5006]
 panel_icon: mdi:currency-usd
 panel_title: Actual Budget
 arch:
@@ -16,9 +17,16 @@ ports_description:
   5006/tcp: Actual Budget web interface
 map:
   - addon_config:rw
+  - ssl:ro
 options:
   timezone: "UTC"
+  certfile: fullchain.pem
+  keyfile: privkey.pem
 schema:
   timezone: "str?"
+  certfile: "str"
+  keyfile: "str"
 environment:
   TZ: "${timezone}"
+  ACTUAL_HTTPS_CERT: "/ssl/{certfile}"
+  ACTUAL_HTTPS_KEY: "/ssl/{keyfile}"

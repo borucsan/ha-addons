@@ -1,3 +1,9 @@
+## 1.1.0
+
+- Added HTTPS support via HA SSL certificates (ACTUAL_HTTPS_CERT / ACTUAL_HTTPS_KEY).
+- Added `certfile` and `keyfile` configuration options.
+- Added "Open Web UI" button (webui) pointing to https://[HOST]:5006.
+
 ## 1.0.0
 
 - Initial release - added Actual Budget: Local-first personal finance app for Home Assistant.
