@@ -2,3 +2,14 @@ configuration:
   timezone:
     name: Timezone
     description: Timezone passed to the Actual Budget container (TZ environment variable).
+  certfile:
+    name: Certificate file
+    description: >
+      SSL certificate file name from the /ssl directory (e.g. fullchain.pem).
+      If the file does not exist, a self-signed certificate will be generated automatically.
+      Leave empty to always use a self-signed certificate.
+  keyfile:
+    name: Private key file
+    description: >
+      SSL private key file name from the /ssl directory (e.g. privkey.pem).
+      Must match the certificate file above.
