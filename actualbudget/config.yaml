@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Actual Budget
-version: "1.3.0"
+version: "1.4.0"
 slug: actualbudget
 description: Local-first personal finance app
 url: "https://github.com/borucsan/ha-addons/tree/main/actualbudget"

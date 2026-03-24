@@ -1,4 +1,4 @@
-## 1.3.0
+## 1.4.0
 
 - Added HTTPS support with automatic SSL certificate management:
   - If HA SSL certificates exist (`certfile`/`keyfile` options), they are used automatically.
