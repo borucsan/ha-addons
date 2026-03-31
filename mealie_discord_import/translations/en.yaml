@@ -1,0 +1,46 @@
+configuration:
+  discord_token:
+    name: Discord bot token
+    description: Token from Discord Developer Portal → Bot.
+  discord_guild_id:
+    name: Discord server (guild) ID
+    description: Optional. Restrict slash commands to one server; leave empty for global registration.
+  discord_command_prefix:
+    name: Legacy command prefix
+    description: Prefix for legacy commands if used by the bot.
+  mealie_base_url:
+    name: Mealie base URL
+    description: Your Mealie instance URL (https://…), no trailing slash.
+  mealie_api_token:
+    name: Mealie API token
+    description: Token from Mealie → Settings → API Tokens.
+  mealie_username:
+    name: Mealie username
+    description: Optional. Only if you use username/password instead of API token.
+  mealie_password:
+    name: Mealie password
+    description: Optional. Only with Mealie username.
+  bot_log_level:
+    name: Log level
+    description: DEBUG, INFO, WARNING, or ERROR.
+  bot_timeout:
+    name: Request timeout (seconds)
+    description: HTTP timeout for Mealie and recipe fetch operations.
+  default_recipe_tags:
+    name: Default recipe tags
+    description: Comma-separated tags applied to imported recipes.
+  require_instructions:
+    name: Require instructions
+    description: Reject recipes without instruction steps unless AI fallback fixes them.
+  require_ingredients:
+    name: Require ingredients
+    description: Reject recipes without ingredients unless AI fallback fixes them.
+  openai_api_key:
+    name: OpenAI API key
+    description: Optional. Enables AI fallback when Mealie parsing is incomplete.
+  ai_enabled:
+    name: Enable AI fallback
+    description: Use OpenAI when Mealie parser fails or validation fails.
+  ai_model:
+    name: OpenAI model
+    description: Model name when AI fallback is enabled (e.g. gpt-3.5-turbo).

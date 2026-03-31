@@ -22,5 +22,12 @@ _Local-first personal finance app for Home Assistant._
 
 _Open-source personal subscription tracker for Home Assistant._
 
+### [Mealie Discord Import](./mealie_discord_import)
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+
+_Discord bot that imports recipes into Mealie from shared links._
+
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

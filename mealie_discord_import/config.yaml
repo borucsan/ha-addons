@@ -1,0 +1,61 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Mealie Discord Import
+version: "1.0.0"
+slug: mealie_discord_import
+description: Discord bot that imports recipes into Mealie from shared links
+url: "https://github.com/borucsan/ha-addons/tree/main/mealie_discord_import"
+arch:
+  - aarch64
+  - amd64
+init: false
+panel_icon: mdi:food-variant
+panel_title: Mealie Discord Import
+image: ghcr.io/borucsan/ha-addons/{arch}-mealie-discord-import
+options:
+  discord_token: ""
+  discord_guild_id: ""
+  discord_command_prefix: "!mealie"
+  mealie_base_url: ""
+  mealie_api_token: ""
+  mealie_username: ""
+  mealie_password: ""
+  bot_log_level: "INFO"
+  bot_timeout: 30
+  default_recipe_tags: "Discord Import,Verify"
+  require_instructions: true
+  require_ingredients: true
+  openai_api_key: ""
+  ai_enabled: false
+  ai_model: "gpt-3.5-turbo"
+schema:
+  discord_token: password
+  discord_guild_id: str?
+  discord_command_prefix: str?
+  mealie_base_url: str
+  mealie_api_token: password
+  mealie_username: str?
+  mealie_password: password?
+  bot_log_level: str?
+  bot_timeout: int?
+  default_recipe_tags: str?
+  require_instructions: bool?
+  require_ingredients: bool?
+  openai_api_key: password?
+  ai_enabled: bool?
+  ai_model: str?
+environment:
+  DISCORD_TOKEN: "${discord_token}"
+  DISCORD_GUILD_ID: "${discord_guild_id}"
+  DISCORD_COMMAND_PREFIX: "${discord_command_prefix}"
+  MEALIE_BASE_URL: "${mealie_base_url}"
+  MEALIE_API_TOKEN: "${mealie_api_token}"
+  MEALIE_USERNAME: "${mealie_username}"
+  MEALIE_PASSWORD: "${mealie_password}"
+  BOT_LOG_LEVEL: "${bot_log_level}"
+  BOT_TIMEOUT: "${bot_timeout}"
+  DEFAULT_RECIPE_TAGS: "${default_recipe_tags}"
+  REQUIRE_INSTRUCTIONS: "${require_instructions}"
+  REQUIRE_INGREDIENTS: "${require_ingredients}"
+  OPENAI_API_KEY: "${openai_api_key}"
+  AI_ENABLED: "${ai_enabled}"
+  AI_MODEL: "${ai_model}"
