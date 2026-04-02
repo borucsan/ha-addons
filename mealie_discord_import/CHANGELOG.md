@@ -1,3 +1,8 @@
+## 1.0.3
+
+- Dockerfile: use `FROM --platform=${TARGETPLATFORM}` so BuildKit pulls the layer for the supervisor’s target architecture (avoids amd64 binaries on arm64 when multi-arch manifests exist).
+- Document multi-arch requirement for aarch64 Home Assistant; single-platform amd64 upstream images cause `exec format error` on ARM.
+
 ## 1.0.2
 
 - Updated mealie-discord-import to 0.5
