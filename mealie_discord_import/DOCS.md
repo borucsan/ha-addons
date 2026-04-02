@@ -10,7 +10,7 @@ This add-on runs the [Mealie Discord Import](https://github.com/borucsan/mealie-
 
 ## Configuration
 
-The add-on reads options from Home Assistant’s `/data/options.json` at startup (it does not rely on Docker `environment` substitution).
+The add-on reads options from Home Assistant’s `/data/options.json` at startup (it does not rely on Docker `environment` substitution). The process runs as **root** inside the container so that file remains readable (Supervisor often mounts it with permissions that do not allow the upstream image’s non-root user to open it).
 
 1. Fill in **Discord bot token** and **Mealie base URL** and **Mealie API token** (required).
 2. Optionally set **Discord server (guild) ID** to register slash commands only on that server.

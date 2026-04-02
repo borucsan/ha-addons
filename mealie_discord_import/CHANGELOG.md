@@ -1,3 +1,8 @@
+## 1.0.5
+
+- Run the container as **root** so `/data/options.json` is readable (Supervisor typically mounts it `0600` / root-only; the upstream image’s `botuser` hit `Permission denied`).
+- Strip any leftover Docker env values that look like unexpanded `${...}` templates before loading options.
+
 ## 1.0.4
 
 - Stop using `environment:` template substitution (Supervisor passed literal `${option}` strings). Options are read from `/data/options.json` in `apply_addon_options.py` before starting the app.

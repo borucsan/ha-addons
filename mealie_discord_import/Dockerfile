@@ -17,7 +17,10 @@ COPY rootfs /
 
 RUN chmod +x /ha-startup.sh
 
-USER botuser
+# Upstream image uses `botuser`, but Supervisor stores add-on options in
+# `/data/options.json` with permissions that are not readable by that user.
+# Run as root so we can read options and start the bot (common for HA add-ons).
+USER root
 
 WORKDIR /app
 

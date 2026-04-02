@@ -12,9 +12,17 @@ def _bool_str(v) -> str:
     return "true" if s in ("1", "true", "yes", "on") else "false"
 
 
+def _strip_unexpanded_docker_templates(env: dict) -> None:
+    """Remove leftover ${option_name} values from Docker env (broken substitution)."""
+    for k, v in list(env.items()):
+        if isinstance(v, str) and v.startswith("${") and v.endswith("}"):
+            env.pop(k, None)
+
+
 def main() -> None:
     os.chdir("/app")
     env = dict(os.environ)
+    _strip_unexpanded_docker_templates(env)
     path = "/data/options.json"
 
     if os.path.isfile(path):
