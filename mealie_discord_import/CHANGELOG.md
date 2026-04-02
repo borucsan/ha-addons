@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Stop using `environment:` template substitution (Supervisor passed literal `${option}` strings). Options are read from `/data/options.json` in `apply_addon_options.py` before starting the app.
+
 ## 1.0.3
 
 - Dockerfile: use `FROM --platform=${TARGETPLATFORM}` so BuildKit pulls the layer for the supervisor’s target architecture (avoids amd64 binaries on arm64 when multi-arch manifests exist).

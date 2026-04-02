@@ -10,6 +10,8 @@ This add-on runs the [Mealie Discord Import](https://github.com/borucsan/mealie-
 
 ## Configuration
 
+The add-on reads options from Home Assistant’s `/data/options.json` at startup (it does not rely on Docker `environment` substitution).
+
 1. Fill in **Discord bot token** and **Mealie base URL** and **Mealie API token** (required).
 2. Optionally set **Discord server (guild) ID** to register slash commands only on that server.
 3. Optionally enable **AI fallback** and add an **OpenAI API key** if you want GPT to parse recipes when Mealie’s parser is insufficient.
