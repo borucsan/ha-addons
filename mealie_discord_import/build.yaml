@@ -1,4 +1,4 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
 build_from:
-  aarch64: ghcr.io/borucsan/mealie-discord-import:sha-2f352bc
-  amd64: ghcr.io/borucsan/mealie-discord-import:sha-2f352bc
+  aarch64: ghcr.io/borucsan/mealie-discord-import:0.5
+  amd64: ghcr.io/borucsan/mealie-discord-import:0.5

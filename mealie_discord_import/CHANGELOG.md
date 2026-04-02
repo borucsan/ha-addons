@@ -1,3 +1,7 @@
+## 1.0.2
+
+- Updated mealie-discord-import to 0.5
+
 ## 1.0.1
 
 - Fixed addon_config
