@@ -1,3 +1,7 @@
+## 1.0.7
+
+- Updated mealie-discord-import to 0.6.0
+  
 ## 1.0.6
 
 - Updated mealie-discord-import to 0.5.2
