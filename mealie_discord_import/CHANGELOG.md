@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Updated mealie-discord-import to 0.5.2
+
 ## 1.0.5
 
 - Run the container as **root** so `/data/options.json` is readable (Supervisor typically mounts it `0600` / root-only; the upstream image’s `botuser` hit `Permission denied`).

@@ -1,3 +1,7 @@
+## 1.4.1
+
+- Updated Actual Budget and lock version to 26.4.0-alpine
+
 ## 1.4.0
 
 - Added HTTPS support with automatic SSL certificate management:
