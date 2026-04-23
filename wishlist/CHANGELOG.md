@@ -1,3 +1,7 @@
+## 0.63.0-19
+
+- **Ingress + signup broken (POST to `https://&lt;ha&gt;/signup`):** The upstream page calls `window.history.replaceState` with the **root** path `"/signup"`, so the address bar leaves the `…/hassio_ingress/…` prefix; the browser then posts to the **HA host’s** `/signup`, not Wishlist. On each start, strip that `replaceState(…, "/signup")` from the pre-built client JS (`patch-ingress-signup-url.cjs` + log). Document in DOCS.
+
 ## 0.63.0-18
 
 - **Docs:** Document how to combine **Home Assistant ingress** (header SSO for family) with a **public domain** (anonymous / normal login): keep `header_auth_enabled` on, and on Nginx Proxy Manager (or another front proxy) **overwrite** the HA user headers to empty on the public host so they are not passed to Wishlist. Clarify UI text for the same.

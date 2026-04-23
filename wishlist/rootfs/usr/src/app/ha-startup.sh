@@ -68,4 +68,8 @@ fi
 # "Cross-site POST form submissions are forbidden". Leave ORIGIN unset (default) so
 # HOST_HEADER / PROTOCOL_HEADER (x-forwarded-*) from Caddy define the URL per request.
 
+# Upstream signup page: replaceState(..., "/signup") moves the address bar to https://&lt;ha&gt;/signup
+# (losing the ingress path) so the form POSTs to the HA core, not the add-on.
+node /usr/src/app/patch-ingress-signup-url.cjs || true
+
 exec sh /usr/src/app/entrypoint.sh

@@ -91,6 +91,10 @@ Name of the HTTP header that contains the user's full name.
 
 Name of the HTTP header that contains the user's email address. Leave empty when using native HA ingress (auto-registration will be skipped; existing users still log in automatically).
 
+## Home Assistant ingress and `/signup` in the address bar
+
+The upstream app (≤ 0.63.x) runs `history.replaceState` on the signup page to show a short URL of **`/signup`**. That is **path-absolute to the site host**, so in ingress the browser’s URL changes from `https://…/api/hassio_ingress/…/…` to **`https://&lt;your-ha&gt;/signup`**, and the next form **POST** goes to **Home Assistant Core** (`/signup` on the HA host) instead of the add-on. This add-on patches the built client bundle at container start to remove that one `replaceState(…, "/signup")` call. If a future upstream changes the minified output, you may see a log line *“0 client bundles changed”* and need an add-on update.
+
 ## Notes
 
 - Data is stored persistently in addon_config: `data/` (SQLite database) and `uploads/` (user images).
