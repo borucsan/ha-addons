@@ -2,7 +2,7 @@ ARG BUILD_FROM
 ARG BUILD_VERSION
 FROM ${BUILD_FROM}
 
-# Matches upstream Wishlist / SvelteKit adapter-node (PORT=3280 in config.yaml).
+# Caddy (upstream entrypoint) binds :3280; it proxies to the Node app on 3000.
 EXPOSE 3280
 
 LABEL maintainer="Dawid Karwot <contact@dkarwot.me>"

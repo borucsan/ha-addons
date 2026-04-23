@@ -75,4 +75,5 @@ Name of the HTTP header that contains the user's email address. Leave empty when
 
 - Data is stored persistently in addon_config: `data/` (SQLite database) and `uploads/` (user images).
 - The add-on uses ingress by default with SSE streaming enabled for real-time list events.
-- A host port (`3280`) is also exposed for API access or external proxy use (same as upstream `ghcr.io/cmintey/wishlist`; the container sets `PORT=3280`).
+- The **upstream** Wishlist image runs **Caddy** on **3280** in the container and reverse-proxies to the SvelteKit server on **3000** (see [Caddyfile](https://github.com/cmintey/wishlist) and `docker-compose` `3280:3280`). The add-on maps **`3280/tcp: 3280`**. **Ingress** must use `ingress_port: 3280` (Caddy), not 3000 — the Supervisor has to hit the same front door as a browser, not the internal Node port.
+- Do **not** set `PORT=3280` in add-on options: that would make Node try to listen on 3280 and break the Caddy → `:3000` setup.
