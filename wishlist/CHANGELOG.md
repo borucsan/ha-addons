@@ -1,3 +1,7 @@
+## 0.63.0-11
+
+- Listen on port **3280** like the upstream Wishlist image: set `PORT=3280` in the add-on environment and `EXPOSE 3280` in the Dockerfile so ingress and host mapping match the running process (adapter-node defaults to 3000 without this).
+
 ## 0.63.0-9
 
 - Fix `Invalid ORIGIN` when using ingress: Supervisor’s `ingress_url` is only a path (`/api/hassio_ingress/...`). Build a full `http(s)://` URL with Home Assistant’s external/internal URL from `/core/api/config` (requires `homeassistant_api: true` on the add-on). Fallback: `http://homeassistant:8123` if the config call is unavailable.
