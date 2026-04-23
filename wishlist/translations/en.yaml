@@ -5,9 +5,10 @@ configuration:
   origin:
     name: Origin URL
     description: >-
-      Leave empty for Home Assistant ingress (recommended): the add-on sets ORIGIN from
-      Supervisor. Set a full URL (http/https) only if you use the mapped port or your own
-      reverse proxy, e.g. https://wishlist.example.com or http://192.168.1.10:3280.
+      Leave empty (recommended): SvelteKit builds the public URL from proxy headers
+      (X-Forwarded-Host / X-Forwarded-Proto) so ingress, a custom domain, and direct :3280
+      all work and form posts pass CSRF checks. Set a single full URL only if you must pin
+      one site (e.g. https://wishlist.example.com) and do not mix other entry points.
   token_time:
     name: Token expiry (hours)
     description: Number of hours until signup and password-reset tokens expire.
@@ -20,8 +21,11 @@ configuration:
   header_auth_enabled:
     name: Enable header authentication (HA SSO)
     description: >-
-      When enabled, Wishlist reads HA Supervisor's injected user headers and logs in the
-      visiting HA user automatically. The user must already exist in Wishlist with a matching username.
+      When enabled, Wishlist trusts the same header names (see below) for auto-login. Use this
+      for HA ingress and household SSO. If you also expose a public domain, strip or overwrite
+      those headers on your public reverse proxy (e.g. Nginx Proxy Manager custom config) so
+      anonymous visitors are not seen as HA users. Users must already exist in Wishlist with a
+      matching username unless email-based auto-registration is configured.
   header_username:
     name: Username header
     description: >-

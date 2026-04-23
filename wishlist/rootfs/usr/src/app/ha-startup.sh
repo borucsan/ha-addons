@@ -61,50 +61,11 @@ if [ -z "$HEADER_EMAIL" ] || [ "$HEADER_EMAIL" = '${header_email}' ]; then
 	export HEADER_EMAIL="X-Remote-Email"
 fi
 
-# SvelteKit resolves links and static assets from ORIGIN. HA ingress is under
-# /api/hassio_ingress/<token>/...; `addons/self/info` only gives that path, not a full URL.
-# Join it with the Home Assistant external URL from /core/api/config (needs homeassistant_api).
-if [ -z "$ORIGIN" ] && [ -n "$SUPERVISOR_TOKEN" ]; then
-	INGRESS_URL=$(
-		node -e '
-const api = process.env.SUPERVISOR_API || "http://supervisor";
-const token = process.env.SUPERVISOR_TOKEN;
-function stripSlash(s) {
-	if (typeof s !== "string" || !s) return "";
-	return s.replace(/\/$/, "");
-}
-(async () => {
-	if (!token) return;
-	const base = api.endsWith("/") ? api : api + "/";
-	const infoR = await fetch(new URL("addons/self/info", base), {
-		headers: { Authorization: "Bearer " + token }
-	});
-	if (!infoR.ok) return;
-	const info = await infoR.json();
-	const raw = info.data && info.data.ingress_url;
-	if (!raw || typeof raw !== "string") return;
-	// If Supervisor ever returns a full URL, use it.
-	if (raw.startsWith("http://") || raw.startsWith("https://")) {
-		process.stdout.write(stripSlash(raw));
-		return;
-	}
-	const path = raw.startsWith("/") ? raw : "/" + raw;
-	const cfgR = await fetch(new URL("core/api/config", base), {
-		headers: { Authorization: "Bearer " + token }
-	});
-	let haBase = "http://homeassistant:8123";
-	if (cfgR.ok) {
-		const cfg = await cfgR.json();
-		haBase = stripSlash(cfg.external_url) || stripSlash(cfg.internal_url) || haBase;
-	}
-	const out = stripSlash(haBase) + stripSlash(path);
-	process.stdout.write(out);
-})().catch(() => {});
-' 2>/dev/null
-	)
-	if [ -n "$INGRESS_URL" ]; then
-		export ORIGIN="$INGRESS_URL"
-	fi
-fi
+# Do not set ORIGIN from Supervisor/ingress here. adapter-node uses
+#   base = process.env.ORIGIN || get_origin(req.headers)
+# If ORIGIN is a single static URL (e.g. HA ingress), SvelteKit's CSRF check compares that
+# to the browser's Origin — custom domains, direct :3280, and ingress would disagree → 403
+# "Cross-site POST form submissions are forbidden". Leave ORIGIN unset (default) so
+# HOST_HEADER / PROTOCOL_HEADER (x-forwarded-*) from Caddy define the URL per request.
 
 exec sh /usr/src/app/entrypoint.sh

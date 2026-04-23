@@ -1,3 +1,11 @@
+## 0.63.0-18
+
+- **Docs:** Document how to combine **Home Assistant ingress** (header SSO for family) with a **public domain** (anonymous / normal login): keep `header_auth_enabled` on, and on Nginx Proxy Manager (or another front proxy) **overwrite** the HA user headers to empty on the public host so they are not passed to Wishlist. Clarify UI text for the same.
+
+## 0.63.0-17
+
+- **403 “Cross-site POST form submissions are forbidden”** on signup/login: SvelteKit compares the browser `Origin` to the request’s `url.origin`. A static `ORIGIN` from Supervisor (ingress URL) made that check fail for other entry points (custom domain, `:3280`, etc.). The add-on **no longer** sets `ORIGIN` from the API; with `origin` left empty, adapter-node derives the URL from **`X-Forwarded-Host` / `X-Forwarded-Proto`** (see [adapter-node](https://svelte.dev/docs/kit/adapter-node)). Caddy now forwards **public** host/proto to Node so `get_origin()` matches how users reach the site.
+
 ## 0.63.0-16
 
 - **Ingress 404 (white / “not found”):** SvelteKit returns `Location: /lists` etc. In the Home Assistant iframe that resolves to the **core** host path (`/lists`), not under `/api/hassio_ingress/...`. The Caddy layer now rewrites `Location` on the response to `{X-Ingress-Path}/…` (trimmed) so 3xx redirects stay inside the ingress.

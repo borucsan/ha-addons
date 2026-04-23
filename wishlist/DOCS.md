@@ -18,9 +18,9 @@ Timezone passed to the container as the `TZ` environment variable.
 
 ### `origin` (optional)
 
-The URL users connect to, e.g. `https://wishlist.example.com` or `http://192.168.1.10:3280`. Leave **empty** for the default (recommended): the add-on reads the ingress path from the Supervisor, loads your Home Assistant **external / internal** URL from Core, and sets `ORIGIN` to a full `https://…/api/hassio_ingress/…` value so the SvelteKit app can load `/_app` assets. This requires the add-on’s `homeassistant_api` permission (granted in this repository) so the container can call `/core/api/config` once at startup.
+Leave **empty** (recommended). SvelteKit’s Node adapter then infers the site URL per request from **`X-Forwarded-Host`** and **`X-Forwarded-Proto`** (set by Caddy from the browser-facing `Host` / scheme, or from an outer reverse proxy). That keeps form submissions and CSRF checks working whether you use **Home Assistant ingress**, a **public domain**, or **http://&lt;ip&gt;:3280**.
 
-Set a full `http://` or `https://` URL here only if you **do not** use ingress (for example you open Wishlist only via the mapped host port or an external reverse proxy at a known URL).
+Set a single full `http://` or `https://` URL only if you intentionally **pin** one public base URL (for example a single reverse proxy hostname) and do not rely on multiple ways to open the same instance.
 
 ### `token_time` (default: `72`)
 
@@ -54,6 +54,26 @@ With `header_auth_enabled: true` and the pre-filled default header names, Wishli
 > Alternatively, set `header_email` to a custom header if your setup provides one (e.g. from Authentik or Authelia via a custom reverse proxy on the exposed port).
 
 > **Security notice:** When header authentication is enabled, Wishlist trusts the headers unconditionally. The HA Supervisor enforces HA authentication before forwarding requests, so using ingress is safe. Exposing the add-on port directly without a trusted proxy while header auth is enabled is **not recommended**.
+
+#### HA ingress (family) + public domain (anonymous) at the same time
+
+It is **one** add-on and **one** global `header_auth_enabled` flag. You cannot turn header auth on only for ingress in config — instead:
+
+1. Set **`header_auth_enabled` to `true`**. In Home Assistant, open Wishlist from the side panel: Supervisor injects the HA user headers and Wishlist can log in household members without a separate password (subject to the [user matching rules](#header-authentication-ha-ingress-sso) above).
+2. Publish **`https://wishlist.example.com` (or your domain) through Nginx Proxy Manager (or any reverse proxy) to the add-on’s host port (e.g. `http://&lt;ha&gt;:3280`)** and make sure **the public vhost does not pass identity headers to Wishlist**. In NPM, use **Custom Nginx Configuration** (e.g. on the *Advanced* tab) so the proxy **overwrites** the headers to empty *before* the request goes to the add-on, for example:
+
+   ```nginx
+   proxy_set_header X-Remote-User-Name "";
+   proxy_set_header X-Remote-User-Display-Name "";
+   proxy_set_header X-Remote-User-Id "";
+   proxy_set_header X-Remote-Email "";
+   ```
+
+   If you changed `header_username`, `header_name`, or `header_email` in the add-on, clear **those** header names instead (and still clear `X-Remote-User-Id` if the upstream [Wishlist](https://github.com/cmintey/wishlist) reads it for SSO).
+
+3. This way **ingress** = headers present = SSO; **public URL** = headers stripped = visitors only see the normal login / signup (anonymous until they use Wishlist accounts). Anyone on the internet could try to *send* fake headers; **you must** overwrite them on the public proxy (as above), not only “remove from defaults”, so clients cannot spoof a HA user on the public hostname.
+
+4. Keep **`origin` empty** so CSRF and URLs work for both the HA URL and your domain (see [origin](#origin-optional)). Leave the add-on’s port mapped only on your internal network, or put the same hostname rules behind a firewall as you prefer.
 
 ### `header_auth_enabled` (default: `false`)
 
