@@ -27,12 +27,38 @@ fi
 
 chown -R node:node "${ADDON_CONFIG}/data" "${ADDON_CONFIG}/uploads"
 
-# Optional `origin` in add-on config: if the user omits it or the Supervisor does not
-# substitute, ORIGIN can be the literal "${origin}" and Wishlist will refuse to start.
-# Unset it so the app can derive the URL from proxy headers (ingress) or set `origin` in
-# the add-on to a real URL (e.g. http://ha-ip:3280) when not using ingress.
+# When the Supervisor does not expand add-on options, env values can be the literal
+# "${option_name}" string. Match defaults from config.yaml "options".
+if [ -z "$TZ" ] || [ "$TZ" = '${timezone}' ]; then
+	export TZ=UTC
+fi
 if [ -z "$ORIGIN" ] || [ "$ORIGIN" = '${origin}' ]; then
 	unset ORIGIN
+fi
+if [ -z "$TOKEN_TIME" ] || [ "$TOKEN_TIME" = '${token_time}' ]; then
+	export TOKEN_TIME=72
+fi
+if [ -z "$DEFAULT_CURRENCY" ] || [ "$DEFAULT_CURRENCY" = '${default_currency}' ]; then
+	export DEFAULT_CURRENCY=USD
+fi
+if [ -z "$MAX_IMAGE_SIZE" ] || [ "$MAX_IMAGE_SIZE" = '${max_image_size}' ]; then
+	export MAX_IMAGE_SIZE=5000000
+fi
+# Upstream may map MAX_IMAGE_SIZE -> BODY_SIZE_LIMIT; fix if left unsubstituted.
+if [ -z "$BODY_SIZE_LIMIT" ] || [ "$BODY_SIZE_LIMIT" = '${max_image_size}' ]; then
+	export BODY_SIZE_LIMIT=5000000
+fi
+if [ -z "$HEADER_AUTH_ENABLED" ] || [ "$HEADER_AUTH_ENABLED" = '${header_auth_enabled}' ]; then
+	export HEADER_AUTH_ENABLED=false
+fi
+if [ -z "$HEADER_USERNAME" ] || [ "$HEADER_USERNAME" = '${header_username}' ]; then
+	export HEADER_USERNAME="X-Remote-User-Name"
+fi
+if [ -z "$HEADER_NAME" ] || [ "$HEADER_NAME" = '${header_name}' ]; then
+	export HEADER_NAME="X-Remote-User-Display-Name"
+fi
+if [ -z "$HEADER_EMAIL" ] || [ "$HEADER_EMAIL" = '${header_email}' ]; then
+	export HEADER_EMAIL="X-Remote-Email"
 fi
 
 exec sh /usr/src/app/entrypoint.sh
