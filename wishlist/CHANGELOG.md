@@ -1,3 +1,7 @@
+## 0.63.0-16
+
+- **Ingress 404 (white / “not found”):** SvelteKit returns `Location: /lists` etc. In the Home Assistant iframe that resolves to the **core** host path (`/lists`), not under `/api/hassio_ingress/...`. The Caddy layer now rewrites `Location` on the response to `{X-Ingress-Path}/…` (trimmed) so 3xx redirects stay inside the ingress.
+
 ## 0.63.0-15
 
 - **Caddy** `Caddyfile` override: add global `servers { trusted_proxies static private_ranges }` so the Supervisor (and other in-path proxies) are trusted and `X-Forwarded-*` is forwarded correctly to SvelteKit; add `X-Ingress-Path` to the upstream. Mitigates ingress **404** when direct `:3280` still works.

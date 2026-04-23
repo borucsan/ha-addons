@@ -2,6 +2,10 @@
 # Requests to this Caddy are almost always from another proxy (Supervisor → 172.30.0.0/16, or
 # a home LAN). Without trusted_proxies, Caddy overwrites X-Forwarded-*; SvelteKit (HOST_HEADER,
 # PROTOCOL_HEADER in entrypoint) then builds wrong URLs and can surface 404.
+#
+# SvelteKit issues redirects like Location: /lists (path-only). In the HA ingress iframe the
+# browser resolves that to https://<ha>:8123/lists (core) → 404. Prepend X-Ingress-Path in Caddy
+# (Supervisor sets this header) so 3xx land under /api/hassio_ingress/…/
 
 {
 	auto_https off
@@ -12,6 +16,13 @@
 }
 
 :3280 {
+	# Strips a trailing slash so {ingress_root}/lists is never //lists
+	map {http.request.header.X-Ingress-Path} {ingress_root} {
+		""        ""
+		~^(.+)/$  ${1}
+		default   {http.request.header.X-Ingress-Path}
+	}
+
 	@static {
 		file
 		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.webp
@@ -36,5 +47,7 @@
 	reverse_proxy :3000 {
 		flush_interval -1
 		header_up X-Ingress-Path {http.request.header.X-Ingress-Path}
+		# Path-absolute redirect only (not https://...); empty ingress_root → $1 unchanged
+		header_down Location "^(/.*)$" {ingress_root}$1
 	}
 }
