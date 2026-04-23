@@ -1,3 +1,8 @@
+## 4.8.2-1
+
+- Updated Wallos to version 4.8.2.
+- moved to wallos versioning
+
 ## 1.4.0
 
 - Fixed persistent storage: corrected addon_config mount path to `/config` (HA Supervisor maps `addon_config` to `/config` inside the container, not `/addon_config`).

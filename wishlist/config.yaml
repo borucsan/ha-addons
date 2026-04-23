@@ -1,0 +1,51 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Wishlist
+version: "0.63.0-1"
+slug: wishlist
+description: Self-hosted shareable wishlist for friends and family
+url: "https://github.com/borucsan/ha-addons/tree/main/wishlist"
+stage: experimental
+ingress: true
+ingress_port: 3280
+ingress_stream: true
+panel_icon: mdi:gift
+panel_title: Wishlist
+arch:
+  - aarch64
+  - amd64
+init: false
+ports:
+  3280/tcp: 3280
+ports_description:
+  3280/tcp: Wishlist web interface
+map:
+  - addon_config:rw
+options:
+  timezone: "UTC"
+  token_time: 72
+  default_currency: "USD"
+  max_image_size: 5000000
+  header_auth_enabled: false
+  header_username: "X-Remote-User-Name"
+  header_name: "X-Remote-User-Display-Name"
+  header_email: "X-Remote-Email"
+schema:
+  timezone: "str?"
+  origin: "str?"
+  token_time: "int?"
+  default_currency: "str?"
+  max_image_size: "int?"
+  header_auth_enabled: "bool?"
+  header_username: "str?"
+  header_name: "str?"
+  header_email: "str?"
+environment:
+  TZ: "${timezone}"
+  ORIGIN: "${origin}"
+  TOKEN_TIME: "${token_time}"
+  DEFAULT_CURRENCY: "${default_currency}"
+  MAX_IMAGE_SIZE: "${max_image_size}"
+  HEADER_AUTH_ENABLED: "${header_auth_enabled}"
+  HEADER_USERNAME: "${header_username}"
+  HEADER_NAME: "${header_name}"
+  HEADER_EMAIL: "${header_email}"
