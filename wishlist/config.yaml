@@ -1,12 +1,12 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Wishlist
-version: "0.63.0-5"
+version: "0.63.0-6"
 slug: wishlist
 description: Self-hosted shareable wishlist for friends and family
 url: "https://github.com/borucsan/ha-addons/tree/main/wishlist"
 stage: experimental
 ingress: true
-ingress_port: 3280
+ingress_port: 3000
 ingress_stream: true
 panel_icon: mdi:gift
 panel_title: Wishlist
@@ -15,9 +15,9 @@ arch:
   - amd64
 init: false
 ports:
-  3280/tcp: 3280
+  3000/tcp: 3000
 ports_description:
-  3280/tcp: Wishlist web interface
+  3000/tcp: Wishlist web interface
 map:
   - addon_config:rw
 options:
@@ -29,7 +29,7 @@ options:
   header_username: "X-Remote-User-Name"
   header_name: "X-Remote-User-Display-Name"
   header_email: "X-Remote-Email"
-  origin: "http://localhost:3280"
+  origin: "http://localhost:3000"
 schema:
   timezone: "str?"
   origin: "str?"
