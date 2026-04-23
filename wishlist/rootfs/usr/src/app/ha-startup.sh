@@ -61,4 +61,31 @@ if [ -z "$HEADER_EMAIL" ] || [ "$HEADER_EMAIL" = '${header_email}' ]; then
 	export HEADER_EMAIL="X-Remote-Email"
 fi
 
+# SvelteKit resolves links and static assets from ORIGIN. HA ingress serves the app only
+# under /api/hassio_ingress/<entry>/...; if ORIGIN is missing, the browser requests /_app/
+# at the host root and Home Assistant returns 404. With an empty `origin` option, take
+# the public ingress URL from the Supervisor API (same token the UI uses).
+if [ -z "$ORIGIN" ] && [ -n "$SUPERVISOR_TOKEN" ]; then
+	INGRESS_URL=$(
+		node -e '
+const api = process.env.SUPERVISOR_API || "http://supervisor";
+const token = process.env.SUPERVISOR_TOKEN;
+(async () => {
+	if (!token) return;
+	const base = api.endsWith("/") ? api : api + "/";
+	const u = new URL("addons/self/info", base);
+	const r = await fetch(u, { headers: { Authorization: "Bearer " + token } });
+	if (!r.ok) return;
+	const j = await r.json();
+	const url = j.data && j.data.ingress_url;
+	if (url && typeof url === "string")
+		process.stdout.write(url.replace(/\/$/, ""));
+})().catch(() => {});
+' 2>/dev/null
+	)
+	if [ -n "$INGRESS_URL" ]; then
+		export ORIGIN="$INGRESS_URL"
+	fi
+fi
+
 exec sh /usr/src/app/entrypoint.sh

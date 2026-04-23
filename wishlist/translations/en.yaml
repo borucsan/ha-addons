@@ -5,8 +5,9 @@ configuration:
   origin:
     name: Origin URL
     description: >-
-      The URL your users will connect to, e.g. https://wishlist.example.com or
-      http://192.168.2.10:3280. Leave empty when using HA ingress.
+      Leave empty for Home Assistant ingress (recommended): the add-on sets ORIGIN from
+      Supervisor. Set a full URL (http/https) only if you use the mapped port or your own
+      reverse proxy, e.g. https://wishlist.example.com or http://192.168.1.10:3000.
   token_time:
     name: Token expiry (hours)
     description: Number of hours until signup and password-reset tokens expire.

@@ -18,7 +18,9 @@ Timezone passed to the container as the `TZ` environment variable.
 
 ### `origin` (optional)
 
-The URL users connect to, e.g. `https://wishlist.example.com` or `http://192.168.2.10:3280`. Only required when accessing Wishlist directly via the exposed port or a custom reverse proxy. Leave empty when using HA ingress — the app will derive the origin from forwarded headers automatically.
+The URL users connect to, e.g. `https://wishlist.example.com` or `http://192.168.1.10:3000`. Leave **empty** for the default (recommended): the add-on asks the Supervisor for the public **ingress** URL and sets the `ORIGIN` the SvelteKit app needs so scripts and assets load under `/api/hassio_ingress/...` instead of returning 404 at the Home Assistant host root.
+
+Set a full `http://` or `https://` URL here only if you **do not** use ingress (for example you open Wishlist only via the mapped host port or an external reverse proxy at a known URL).
 
 ### `token_time` (default: `72`)
 
@@ -73,4 +75,4 @@ Name of the HTTP header that contains the user's email address. Leave empty when
 
 - Data is stored persistently in addon_config: `data/` (SQLite database) and `uploads/` (user images).
 - The add-on uses ingress by default with SSE streaming enabled for real-time list events.
-- A host port (`3280`) is also exposed for API access or external proxy use.
+- A host port (`3000`) is also exposed for API access or external proxy use.

@@ -49,7 +49,7 @@ Install the **Wishlist** add-on from this repository and start it.
 | Option | Default | Description |
 |---|---|---|
 | `timezone` | `UTC` | Container timezone (TZ env var) |
-| `origin` | — | Full URL users connect to (leave empty for ingress) |
+| `origin` | _(empty)_ | Leave empty for ingress (URL is taken from Supervisor). Set only for direct port / external proxy access. |
 | `token_time` | `72` | Hours until signup/reset tokens expire |
 | `default_currency` | `USD` | Global default currency (ISO code) |
 | `max_image_size` | `5000000` | Max image upload size in bytes |
