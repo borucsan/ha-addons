@@ -61,25 +61,44 @@ if [ -z "$HEADER_EMAIL" ] || [ "$HEADER_EMAIL" = '${header_email}' ]; then
 	export HEADER_EMAIL="X-Remote-Email"
 fi
 
-# SvelteKit resolves links and static assets from ORIGIN. HA ingress serves the app only
-# under /api/hassio_ingress/<entry>/...; if ORIGIN is missing, the browser requests /_app/
-# at the host root and Home Assistant returns 404. With an empty `origin` option, take
-# the public ingress URL from the Supervisor API (same token the UI uses).
+# SvelteKit resolves links and static assets from ORIGIN. HA ingress is under
+# /api/hassio_ingress/<token>/...; `addons/self/info` only gives that path, not a full URL.
+# Join it with the Home Assistant external URL from /core/api/config (needs homeassistant_api).
 if [ -z "$ORIGIN" ] && [ -n "$SUPERVISOR_TOKEN" ]; then
 	INGRESS_URL=$(
 		node -e '
 const api = process.env.SUPERVISOR_API || "http://supervisor";
 const token = process.env.SUPERVISOR_TOKEN;
+function stripSlash(s) {
+	if (typeof s !== "string" || !s) return "";
+	return s.replace(/\/$/, "");
+}
 (async () => {
 	if (!token) return;
 	const base = api.endsWith("/") ? api : api + "/";
-	const u = new URL("addons/self/info", base);
-	const r = await fetch(u, { headers: { Authorization: "Bearer " + token } });
-	if (!r.ok) return;
-	const j = await r.json();
-	const url = j.data && j.data.ingress_url;
-	if (url && typeof url === "string")
-		process.stdout.write(url.replace(/\/$/, ""));
+	const infoR = await fetch(new URL("addons/self/info", base), {
+		headers: { Authorization: "Bearer " + token }
+	});
+	if (!infoR.ok) return;
+	const info = await infoR.json();
+	const raw = info.data && info.data.ingress_url;
+	if (!raw || typeof raw !== "string") return;
+	// If Supervisor ever returns a full URL, use it.
+	if (raw.startsWith("http://") || raw.startsWith("https://")) {
+		process.stdout.write(stripSlash(raw));
+		return;
+	}
+	const path = raw.startsWith("/") ? raw : "/" + raw;
+	const cfgR = await fetch(new URL("core/api/config", base), {
+		headers: { Authorization: "Bearer " + token }
+	});
+	let haBase = "http://homeassistant:8123";
+	if (cfgR.ok) {
+		const cfg = await cfgR.json();
+		haBase = stripSlash(cfg.external_url) || stripSlash(cfg.internal_url) || haBase;
+	}
+	const out = stripSlash(haBase) + stripSlash(path);
+	process.stdout.write(out);
 })().catch(() => {});
 ' 2>/dev/null
 	)

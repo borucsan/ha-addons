@@ -18,7 +18,7 @@ Timezone passed to the container as the `TZ` environment variable.
 
 ### `origin` (optional)
 
-The URL users connect to, e.g. `https://wishlist.example.com` or `http://192.168.1.10:3000`. Leave **empty** for the default (recommended): the add-on asks the Supervisor for the public **ingress** URL and sets the `ORIGIN` the SvelteKit app needs so scripts and assets load under `/api/hassio_ingress/...` instead of returning 404 at the Home Assistant host root.
+The URL users connect to, e.g. `https://wishlist.example.com` or `http://192.168.1.10:3000`. Leave **empty** for the default (recommended): the add-on reads the ingress path from the Supervisor, loads your Home Assistant **external / internal** URL from Core, and sets `ORIGIN` to a full `https://…/api/hassio_ingress/…` value so the SvelteKit app can load `/_app` assets. This requires the add-on’s `homeassistant_api` permission (granted in this repository) so the container can call `/core/api/config` once at startup.
 
 Set a full `http://` or `https://` URL here only if you **do not** use ingress (for example you open Wishlist only via the mapped host port or an external reverse proxy at a known URL).
 

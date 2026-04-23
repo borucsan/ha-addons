@@ -1,3 +1,7 @@
+## 0.63.0-9
+
+- Fix `Invalid ORIGIN` when using ingress: Supervisor’s `ingress_url` is only a path (`/api/hassio_ingress/...`). Build a full `http(s)://` URL with Home Assistant’s external/internal URL from `/core/api/config` (requires `homeassistant_api: true` on the add-on). Fallback: `http://homeassistant:8123` if the config call is unavailable.
+
 ## 0.63.0-8
 
 - Fix Home Assistant ingress returning 404: when `origin` is left empty, set `ORIGIN` from the Supervisor `ingress_url` (SvelteKit needs the full ingress base path for `/_app` assets).
