@@ -27,4 +27,12 @@ fi
 
 chown -R node:node "${ADDON_CONFIG}/data" "${ADDON_CONFIG}/uploads"
 
+# Optional `origin` in add-on config: if the user omits it or the Supervisor does not
+# substitute, ORIGIN can be the literal "${origin}" and Wishlist will refuse to start.
+# Unset it so the app can derive the URL from proxy headers (ingress) or set `origin` in
+# the add-on to a real URL (e.g. http://ha-ip:3280) when not using ingress.
+if [ -z "$ORIGIN" ] || [ "$ORIGIN" = '${origin}' ]; then
+	unset ORIGIN
+fi
+
 exec sh /usr/src/app/entrypoint.sh
