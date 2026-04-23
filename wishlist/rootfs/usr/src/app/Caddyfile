@@ -1,0 +1,40 @@
+# Upstream: https://github.com/cmintey/wishlist — patched for Home Assistant ingress.
+# Requests to this Caddy are almost always from another proxy (Supervisor → 172.30.0.0/16, or
+# a home LAN). Without trusted_proxies, Caddy overwrites X-Forwarded-*; SvelteKit (HOST_HEADER,
+# PROTOCOL_HEADER in entrypoint) then builds wrong URLs and can surface 404.
+
+{
+	auto_https off
+	admin off
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+:3280 {
+	@static {
+		file
+		path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.webp
+	}
+
+	@not_sse {
+		not path /wishlists/*/events
+		not path /lists/*/events
+	}
+
+	# User images
+	handle_path /api/assets/* {
+		header @static Cache-Control max-age=31536000
+		root * /usr/src/app/uploads/
+		file_server
+	}
+
+	encode @not_sse {
+		gzip
+	}
+
+	reverse_proxy :3000 {
+		flush_interval -1
+		header_up X-Ingress-Path {http.request.header.X-Ingress-Path}
+	}
+}

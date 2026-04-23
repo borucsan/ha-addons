@@ -1,3 +1,7 @@
+## 0.63.0-15
+
+- **Caddy** `Caddyfile` override: add global `servers { trusted_proxies static private_ranges }` so the Supervisor (and other in-path proxies) are trusted and `X-Forwarded-*` is forwarded correctly to SvelteKit; add `X-Ingress-Path` to the upstream. Mitigates ingress **404** when direct `:3280` still works.
+
 ## 0.63.0-14
 
 - Document and restore **`ingress_port: 3280`** and **`3280/tcp: 3280`**: the official image serves traffic through **Caddy** on 3280, which reverse-proxies to SvelteKit on 3000. Connecting ingress to 3000 bypasses Caddy; matching upstream `ports: 3280:3280` is correct even though the Node process listens on 3000 inside the stack.
