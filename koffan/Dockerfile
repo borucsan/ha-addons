@@ -7,6 +7,8 @@ LABEL io.hass.version=${BUILD_VERSION}
 LABEL io.hass.type="addon" 
 LABEL io.hass.arch="aarch64|amd64" 
 
+RUN apk add --no-cache nginx
+
 COPY rootfs /
 
 RUN chmod +x /ha-startup.sh

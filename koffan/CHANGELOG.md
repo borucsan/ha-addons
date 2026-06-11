@@ -1,3 +1,8 @@
+## 2.11.0-3
+
+- Fixed base path issue with HA ingress: added nginx reverse proxy that rewrites absolute paths (`/static/`, htmx attributes, WebSocket) to include the ingress base path so all assets and requests resolve correctly inside the ingress iframe.
+- Added `ingress_stream: true` for proper WebSocket support through ingress.
+
 ## 2.11.0-2
 
 - Disabled Koffan's built-in authentication — Home Assistant ingress already requires HA login.
