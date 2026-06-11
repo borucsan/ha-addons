@@ -5,20 +5,13 @@ Koffan is a free, self-hosted groceries list for families and shared households,
 ## How to use
 
 1. Install the add-on.
-2. Set `app_password` in add-on configuration to a secure password.
-3. (Optional) Set `timezone`, `default_lang`, and other options.
-4. Start the add-on.
-5. Open Koffan from the sidebar using the **Koffan** panel entry.
+2. (Optional) Set `timezone`, `default_lang`, and other options.
+3. Start the add-on.
+4. Open Koffan from the sidebar using the **Koffan** panel entry.
 
-## Configuration
+## Authentication
 
-### `app_password` (required)
-
-Login password for the Koffan web interface. Change from the default `changeme` before first use.
-
-### `disable_auth`
-
-Set to `true` to disable Koffan's built-in authentication. Useful when running behind a reverse proxy that handles authentication. Defaults to `false`.
+Koffan's built-in login is disabled automatically — Home Assistant ingress already requires users to be logged into HA before they can reach the add-on.
 
 ### `default_lang`
 
