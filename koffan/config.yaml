@@ -1,6 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: Koffan
-version: "2.11.0-3"
+version: "2.11.0-4"
 slug: koffan
 description: Free self-hosted groceries list for families and shared households
 url: "https://github.com/borucsan/ha-addons/tree/main/koffan"

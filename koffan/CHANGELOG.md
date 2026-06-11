@@ -1,3 +1,7 @@
+## 2.11.0-4
+
+- Fixed POST/PUT/DELETE requests: Koffan uses JavaScript `fetch()` calls (via Alpine.js) instead of htmx attributes — added sub_filter patterns for single-quoted, double-quoted and backtick template literal variants.
+
 ## 2.11.0-3
 
 - Fixed base path issue with HA ingress: added nginx reverse proxy that rewrites absolute paths (`/static/`, htmx attributes, WebSocket) to include the ingress base path so all assets and requests resolve correctly inside the ingress iframe.
