@@ -1,3 +1,7 @@
+## 4.9.3-1
+
+- Updated Wallos to version 4.9.3.
+
 ## 4.8.2-1
 
 - Updated Wallos to version 4.8.2.

@@ -22,6 +22,13 @@ _Local-first personal finance app for Home Assistant._
 
 _Open-source personal subscription tracker for Home Assistant._
 
+### [Koffan](./koffan)
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+
+_Free self-hosted groceries list for families and shared households._
+
 ### [Mealie Discord Import](./mealie_discord_import)
 
 ![Supports aarch64 Architecture][aarch64-shield]

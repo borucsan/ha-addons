@@ -1,0 +1,21 @@
+configuration:
+  timezone:
+    name: Timezone
+    description: Timezone passed to the Koffan container (TZ environment variable).
+  app_password:
+    name: App password
+    description: Login password for the Koffan web interface. Change from the default before first use.
+  disable_auth:
+    name: Disable authentication
+    description: >
+      Set to true to disable Koffan's built-in authentication.
+      Useful when running behind a reverse proxy that handles authentication.
+  default_lang:
+    name: Default language
+    description: >
+      Default UI language on first load.
+      Supported values: pl, en, de, es, fr, pt, uk, no, lt, el, sk, ru.
+  api_token:
+    name: API token
+    description: >
+      Secret token to enable the REST API. Leave empty to disable the API.

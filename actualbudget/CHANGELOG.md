@@ -1,3 +1,7 @@
+## 26.6.0-1
+
+- Updated Actual Budget to version 26.6.0.
+
 ## 1.4.1
 
 - Updated Actual Budget and lock version to 26.4.0-alpine

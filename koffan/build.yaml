@@ -1,4 +1,4 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
 build_from:
-  aarch64: "ghcr.io/cmintey/wishlist:v0.63.0"
-  amd64: "ghcr.io/cmintey/wishlist:v0.63.0"
+  aarch64: "ghcr.io/pansalut/koffan:v2.11.0"
+  amd64: "ghcr.io/pansalut/koffan:v2.11.0"
