@@ -1,3 +1,7 @@
+## 2.11.0-5
+
+- Replaced fragile nginx text-replacement of JavaScript patterns with a proper JS monkey-patch (`ha-ingress-patch.js`) injected at the start of every page. Patches `window.fetch`, `XMLHttpRequest.open` (htmx), and `WebSocket` (including absolute same-origin URLs like `wss://host/ws`) so all API calls go through the ingress path regardless of how the URL was constructed.
+
 ## 2.11.0-4
 
 - Fixed POST/PUT/DELETE requests: Koffan uses JavaScript `fetch()` calls (via Alpine.js) instead of htmx attributes — added sub_filter patterns for single-quoted, double-quoted and backtick template literal variants.
