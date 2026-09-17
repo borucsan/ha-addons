@@ -15,7 +15,7 @@ Koffan's built-in login is disabled automatically — Home Assistant ingress alr
 
 ### `default_lang`
 
-Default UI language on first load. Supported values: `pl`, `en`, `de`, `es`, `fr`, `pt`, `uk`, `no`, `lt`, `el`, `sk`, `ru`. Defaults to `en`.
+Default UI language on first load. Supported values: `cs`, `de`, `el`, `en`, `es`, `fa`, `fr`, `it`, `lt`, `nl`, `no`, `pl`, `pt`, `ru`, `sk`, `sv`, `uk`, `zh`. Defaults to `en`.
 
 ### `api_token`
 

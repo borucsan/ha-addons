@@ -1,3 +1,7 @@
+## 26.9.0-1
+
+- Updated Actual Budget to version 26.9.0.
+
 ## 26.6.0-1
 
 - Updated Actual Budget to version 26.6.0.

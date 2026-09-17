@@ -1,3 +1,9 @@
+## 2.14.1-1
+
+- Updated Koffan to version 2.14.1 (offline shopping, UI scale, webhooks, HTTP 431 fix).
+- Disabled the Koffan service worker under Home Assistant ingress so PWA/offline caching does not intercept requests on the HA origin.
+- Increased nginx header/proxy buffers to match Koffan's 16 KiB request header limit behind ingress.
+
 ## 2.11.0-5
 
 - Replaced fragile nginx text-replacement of JavaScript patterns with a proper JS monkey-patch (`ha-ingress-patch.js`) injected at the start of every page. Patches `window.fetch`, `XMLHttpRequest.open` (htmx), and `WebSocket` (including absolute same-origin URLs like `wss://host/ws`) so all API calls go through the ingress path regardless of how the URL was constructed.

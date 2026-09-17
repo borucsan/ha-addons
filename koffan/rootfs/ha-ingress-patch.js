@@ -14,6 +14,20 @@
     var base  = token ? '/api/hassio_ingress/' + token : '';
     if (!base) return;
 
+    // Koffan 2.14 registers a PWA service worker with scope '/' and caches
+    // absolute /static/* URLs. That cannot work under HA ingress (wrong origin
+    // path and a scope broader than the script URL). Disable it here.
+    if (navigator.serviceWorker) {
+        navigator.serviceWorker.register = function () {
+            return Promise.reject(new Error('Service worker disabled under HA ingress'));
+        };
+        if (navigator.serviceWorker.getRegistrations) {
+            navigator.serviceWorker.getRegistrations().then(function (regs) {
+                regs.forEach(function (r) { r.unregister(); });
+            });
+        }
+    }
+
     function fix(u) {
         if (typeof u !== 'string') return u;
         // Absolute path starting with / (but not //)

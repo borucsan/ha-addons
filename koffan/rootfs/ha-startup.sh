@@ -21,6 +21,8 @@ mkdir -p /tmp/nginx/client_body /tmp/nginx/proxy
 export DISABLE_AUTH=true
 # Run Go app on internal port 3000; nginx listens on 8080 (ingress_port).
 export PORT=3000
+# Match Koffan 2.13.1+ default; keep explicit so HA ingress headers do not 431.
+export HTTP_READ_BUFFER_SIZE="${HTTP_READ_BUFFER_SIZE:-16384}"
 
 /app/shopping-list &
 

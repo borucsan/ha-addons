@@ -16,8 +16,7 @@ Free self-hosted groceries list for families and shared households.
 
 1. Add this repository to your Home Assistant add-on store.
 2. Install the **Koffan** add-on.
-3. Set `app_password` in the add-on configuration.
-4. Start the add-on.
+3. Start the add-on. Authentication is handled by Home Assistant ingress.
 
 ## Documentation
 

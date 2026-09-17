@@ -6,7 +6,7 @@ configuration:
     name: Default language
     description: >
       Default UI language on first load.
-      Supported values: pl, en, de, es, fr, pt, uk, no, lt, el, sk, ru.
+      Supported values: cs, de, el, en, es, fa, fr, it, lt, nl, no, pl, pt, ru, sk, sv, uk, zh.
   api_token:
     name: API token
     description: >

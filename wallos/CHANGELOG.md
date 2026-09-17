@@ -1,3 +1,7 @@
+## 5.7.1-1
+
+- Updated Wallos to version 5.7.1 (v5 UI overhaul, statistics, Markdown notes).
+
 ## 4.9.3-1
 
 - Updated Wallos to version 4.9.3.
