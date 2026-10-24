@@ -8,7 +8,7 @@
 
 This add-on runs [mealie-mcp-server](https://github.com/rldiao/mealie-mcp-server) over the MCP **Streamable HTTP** transport, so AI assistants such as LobeHub can search, create and edit recipes, shopping lists and meal plans in [Mealie](https://mealie.io/).
 
-Upstream publishes no Docker image, so the add-on builds a pinned upstream commit (see `build.yaml`). The first install takes a few minutes.
+Upstream publishes no Docker image, so the add-on builds a pinned upstream commit (`MEALIE_MCP_REF` in the `Dockerfile`). The first install takes a few minutes.
 
 ## Installation
 

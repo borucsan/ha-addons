@@ -1,7 +1,0 @@
-# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
-build_from:
-  aarch64: python:3.12-slim
-  amd64: python:3.12-slim
-# Upstream publishes no image or releases, so the add-on builds a pinned commit.
-args:
-  MEALIE_MCP_REF: 86ebf379536cf2b3a07c2007798db02894c51f21

@@ -1,6 +1,7 @@
-ARG BUILD_FROM
+# Base image lives here: Supervisor 2026.04+ no longer takes it from build.yaml.
+FROM ghcr.io/ellite/wallos:5.10.2
+
 ARG BUILD_VERSION
-FROM ${BUILD_FROM}
 
 LABEL maintainer="Dawid Karwot <contact@dkarwot.me>" 
 LABEL io.hass.version=${BUILD_VERSION} 

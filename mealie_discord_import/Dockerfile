@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:1
 # TARGETPLATFORM is set by BuildKit to the supervisor target (linux/arm64, linux/amd64, …).
-ARG BUILD_FROM
-ARG BUILD_VERSION=0.0.0
+# Base image lives here: Supervisor 2026.04+ no longer takes it from build.yaml.
 ARG TARGETPLATFORM
 
-FROM --platform=${TARGETPLATFORM} ${BUILD_FROM}
+FROM --platform=${TARGETPLATFORM} ghcr.io/borucsan/mealie-discord-import:0.6.0
+
+ARG BUILD_VERSION=0.0.0
 
 LABEL maintainer="Dawid Karwot <contact@dkarwot.me>"
 LABEL io.hass.version=${BUILD_VERSION}

@@ -1,4 +1,0 @@
-# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
-build_from:
-  aarch64: "ghcr.io/ellite/wallos:5.10.2"
-  amd64: "ghcr.io/ellite/wallos:5.10.2"
