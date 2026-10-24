@@ -1,3 +1,7 @@
+## 5.10.2-1
+
+- Updated Wallos to version 5.10.2 (push notifications, several categories and payers per subscription, bulk actions, PHP 8.3.36 security rebuild, IPv4-only nginx fallback).
+
 ## 5.7.1-1
 
 - Updated Wallos to version 5.7.1 (v5 UI overhaul, statistics, Markdown notes).

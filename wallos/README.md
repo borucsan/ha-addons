@@ -25,7 +25,7 @@
 This add-on runs [Wallos](https://github.com/ellite/Wallos) inside Home Assistant OS.
 
 Wallos is an open-source, self-hosted personal subscription tracker.  
-Wallos version: 5.7.1
+Wallos version: 5.10.2
 
 ## Installation
 

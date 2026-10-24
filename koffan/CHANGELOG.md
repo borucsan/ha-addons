@@ -1,3 +1,10 @@
+## 2.17.0-1
+
+- Updated Koffan to version 2.17.0 (move products between lists, offline store lock fix).
+- Fixed 404 when opening or creating a list under Home Assistant ingress. Koffan navigates with `location.href = '/lists/ID'` and reads the list ID from `location.pathname`; nginx now points those at an ingress-aware shim in `ha-ingress-patch.js`, the patch also covers `history.pushState`/`replaceState`, and `HX-Redirect` headers get the ingress prefix.
+- **Back up the add-on before upgrading:** Koffan 2.16.0 migrates the database on first start and the migration cannot be undone. Restore the backup to downgrade.
+- Optional multi-user accounts (`MULTI_USER`) from 2.16.0 stay off, because the add-on runs with `DISABLE_AUTH=true` behind Home Assistant ingress.
+
 ## 2.14.1-1
 
 - Updated Koffan to version 2.14.1 (offline shopping, UI scale, webhooks, HTTP 431 fix).
