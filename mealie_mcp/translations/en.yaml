@@ -1,0 +1,18 @@
+configuration:
+  mealie_base_url:
+    name: Mealie base URL
+    description: URL of your Mealie instance reachable from Home Assistant, e.g. http://192.168.1.10:9925 (no trailing slash).
+  mealie_api_key:
+    name: Mealie API key
+    description: Token from Mealie → Profile → API Tokens.
+  auth_token:
+    name: MCP access token
+    description: 'Clients must send the header "Authorization: Bearer <token>". At least 16 characters, e.g. from `openssl rand -hex 32`.'
+  enable_ai_import:
+    name: Enable AI recipe import
+    description: Adds the AI import tool (needs Mealie 3.23.0+ with a default AI provider).
+  log_level:
+    name: Log level
+    description: DEBUG, INFO, WARNING, ERROR, or CRITICAL.
+network:
+  8765/tcp: MCP endpoint (Streamable HTTP, path /mcp)

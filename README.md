@@ -36,5 +36,12 @@ _Free self-hosted groceries list for families and shared households._
 
 _Discord bot that imports recipes into Mealie from shared links._
 
+### [Mealie MCP Server](./mealie_mcp)
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+
+_MCP server (Streamable HTTP) that gives AI assistants access to Mealie._
+
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
