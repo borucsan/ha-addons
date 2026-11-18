@@ -1,5 +1,5 @@
 # Base image lives here: Supervisor 2026.04+ no longer takes it from build.yaml.
-FROM ghcr.io/actualbudget/actual:26.10.0-alpine
+FROM ghcr.io/actualbudget/actual:26.11.0-alpine
 
 ARG BUILD_VERSION
 

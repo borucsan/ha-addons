@@ -1,5 +1,5 @@
 # Base image lives here: Supervisor 2026.04+ no longer takes it from build.yaml.
-FROM ghcr.io/ellite/wallos:5.10.2
+FROM ghcr.io/ellite/wallos:5.11.2
 
 ARG BUILD_VERSION
 

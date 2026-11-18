@@ -1,3 +1,7 @@
+## 5.11.2-1
+
+- Updated Wallos to version 5.11.2 (5.10.3–5.10.4 XSS fixes, 5.11.0 colored folders, mark/unmark paid, second exchange-rate provider, instance-level notification servers, pay-period statistics, 5.11.2 subscription frequency validation).
+
 ## 5.10.2-1
 
 - Updated Wallos to version 5.10.2 (push notifications, several categories and payers per subscription, bulk actions, PHP 8.3.36 security rebuild, IPv4-only nginx fallback).
