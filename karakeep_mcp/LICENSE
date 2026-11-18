@@ -1,0 +1,11 @@
+The Home Assistant add-on wrapper in this directory is provided as-is, without
+warranty.
+
+It bundles two upstream components at build time, each under its own license:
+
+- Karakeep MCP server (@karakeep/mcp) — GNU Affero General Public License v3.0
+  https://github.com/karakeep-app/karakeep/blob/main/LICENSE
+- supergateway — MIT License
+  https://github.com/supercorp-ai/supergateway/blob/main/LICENSE
+
+See DOCS.md for details.

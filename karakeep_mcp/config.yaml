@@ -1,0 +1,26 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Karakeep MCP Server
+version: "1.0.0"
+slug: karakeep_mcp
+description: MCP server (Streamable HTTP) that gives AI assistants access to Karakeep
+url: "https://github.com/borucsan/ha-addons/tree/main/karakeep_mcp"
+arch:
+  - aarch64
+  - amd64
+init: false
+ports:
+  8765/tcp: 8765
+ports_description:
+  8765/tcp: MCP endpoint (Streamable HTTP, path /mcp)
+options:
+  karakeep_api_addr: ""
+  karakeep_api_key: ""
+  custom_headers: ""
+  auth_token: ""
+  log_level: "info"
+schema:
+  karakeep_api_addr: url
+  karakeep_api_key: password
+  custom_headers: password
+  auth_token: password
+  log_level: list(debug|info|none)?

@@ -22,6 +22,13 @@ _Local-first personal finance app for Home Assistant._
 
 _Open-source personal subscription tracker for Home Assistant._
 
+### [Karakeep MCP Server](./karakeep_mcp)
+
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+
+_MCP server (Streamable HTTP) that gives AI assistants access to Karakeep._
+
 ### [Koffan](./koffan)
 
 ![Supports aarch64 Architecture][aarch64-shield]

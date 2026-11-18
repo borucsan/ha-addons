@@ -1,0 +1,18 @@
+configuration:
+  karakeep_api_addr:
+    name: Karakeep API address
+    description: URL of your Karakeep instance reachable from Home Assistant, e.g. https://karakeep.example.com (no trailing slash).
+  karakeep_api_key:
+    name: Karakeep API key
+    description: Token from Karakeep → Settings → API Keys. The MCP server acts as this user.
+  custom_headers:
+    name: Custom headers
+    description: 'Optional JSON object of extra headers sent to Karakeep, e.g. {"CF-Access-Client-Id": "...", "CF-Access-Client-Secret": "..."}.'
+  auth_token:
+    name: MCP access token
+    description: 'Clients must send the header "Authorization: Bearer <token>". At least 16 characters, e.g. from `openssl rand -hex 32`.'
+  log_level:
+    name: Log level
+    description: debug, info, or none for the gateway.
+network:
+  8765/tcp: MCP endpoint (Streamable HTTP, path /mcp)
