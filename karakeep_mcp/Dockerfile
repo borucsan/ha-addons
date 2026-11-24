@@ -19,6 +19,6 @@ LABEL io.hass.arch="aarch64|amd64"
 
 COPY rootfs /
 
-EXPOSE 8765
+EXPOSE 8766
 
 CMD ["node", "/run.js"]

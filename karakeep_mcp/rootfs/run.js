@@ -2,7 +2,7 @@
 /** Run Karakeep's stdio-only MCP server over Streamable HTTP.
  *
  * Reads /data/options.json, waits for Karakeep to answer, then starts
- * supergateway: stdio (karakeep-mcp) -> Streamable HTTP (/mcp) on :8765.
+ * supergateway: stdio (karakeep-mcp) -> Streamable HTTP (/mcp) on :8766.
  * supergateway also enforces the bearer token (SUPERGATEWAY_API_KEY).
  */
 "use strict";
@@ -15,7 +15,7 @@ const MIN_TOKEN_LENGTH = 16;
 const KARAKEEP_WAIT_MS = 5 * 60 * 1000;
 const KARAKEEP_RETRY_MS = 5 * 1000;
 const KARAKEEP_TIMEOUT_MS = 5 * 1000;
-const PORT = 8765;
+const PORT = 8766;
 
 function log(level, message, ...args) {
   console.error(`[karakeep-mcp] ${level}: ${message}`, ...args);

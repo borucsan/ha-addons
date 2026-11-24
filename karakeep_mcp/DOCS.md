@@ -23,7 +23,7 @@ If Karakeep is not reachable yet, the add-on retries for up to 5 minutes before 
 
 ## Connecting a client
 
-- **URL:** `http://<Home Assistant IP>:8765/mcp`
+- **URL:** `http://<Home Assistant IP>:8766/mcp`
 - **Transport:** Streamable HTTP
 - **Header:** `Authorization: Bearer <MCP access token>`
 
@@ -31,9 +31,22 @@ If Karakeep is not reachable yet, the add-on retries for up to 5 minutes before 
 
 **Settings** → **Plugins** (or **Skills**) → **Add custom plugin** → **MCP**, choose **Streamable HTTP**, enter the URL above and add the `Authorization` header (or pick Bearer Token authentication and paste the token).
 
+## Troubleshooting: LobeHub SSRF protection
+
+Newer LobeHub versions block server-side MCP connections to private IP addresses with an error like `The MCP server address resolves to a private ... IP address`. On a **self-hosted** LobeHub, allow the Home Assistant IP and restart LobeHub:
+
+```
+SSRF_ALLOW_PRIVATE_IP_ADDRESS=0
+SSRF_ALLOW_IP_ADDRESS_LIST=192.168.1.10
+```
+
+`SSRF_ALLOW_IP_ADDRESS_LIST` takes comma-separated **IP addresses** (not hostnames); replace the example with your Home Assistant IP. Setting `SSRF_ALLOW_PRIVATE_IP_ADDRESS=1` allows all private IPs but disables SSRF protection entirely, so the allowlist is safer.
+
+If you use **hosted LobeHub**, it cannot reach your LAN and these variables are not available: publish the endpoint behind a trusted HTTPS reverse proxy or tunnel instead, keeping the `Authorization: Bearer <token>` requirement.
+
 ## Security
 
-Anyone with the MCP access token can read, change and delete everything the Karakeep API key can. Keep port 8765 inside your local network; do not forward it to the internet. To restrict access further, use a Karakeep API key belonging to a user with only the permissions you need. The gateway also answers `GET /healthz` without a token.
+Anyone with the MCP access token can read, change and delete everything the Karakeep API key can. Keep port 8766 inside your local network; do not forward it to the internet. To restrict access further, use a Karakeep API key belonging to a user with only the permissions you need. The gateway also answers `GET /healthz` without a token.
 
 ## Disclaimer
 

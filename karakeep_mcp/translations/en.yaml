@@ -15,4 +15,4 @@ configuration:
     name: Log level
     description: debug, info, or none for the gateway.
 network:
-  8765/tcp: MCP endpoint (Streamable HTTP, path /mcp)
+  8766/tcp: MCP endpoint (Streamable HTTP, path /mcp)
